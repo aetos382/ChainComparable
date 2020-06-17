@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ChainComparable
@@ -12,15 +12,6 @@ namespace ChainComparable
             [AllowNull] T value)
         {
             this._valueHolder = new ValueHolder<T>(value);
-
-            if (value is null)
-            {
-                this._stringValue = string.Empty;
-            }
-            else
-            {
-                this._stringValue = value.ToString();
-            }
         }
 
         [AllowNull]
@@ -33,11 +24,9 @@ namespace ChainComparable
             }
         }
 
-        private readonly string _stringValue;
-
         public override string ToString()
         {
-            return this._stringValue;
+            return this._valueHolder.ToString();
         }
 
         public override bool Equals(

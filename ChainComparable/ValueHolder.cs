@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -13,11 +13,27 @@ namespace ChainComparable
             [AllowNull] T value)
         {
             this.Value = value;
+
+            if (value is null)
+            {
+                this._stringValue = string.Empty;
+            }
+            else
+            {
+                this._stringValue = value.ToString();
+            }
         }
 
         [AllowNull]
         [MaybeNull]
         public T Value { get; }
+
+        private readonly string _stringValue;
+
+        public override string ToString()
+        {
+            return this._stringValue;
+        }
 
         public override int GetHashCode()
         {
