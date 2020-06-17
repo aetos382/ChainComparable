@@ -20,6 +20,7 @@ namespace ChainComparable
         public bool Result { get; }
 
         [AllowNull]
+        [MaybeNull]
         public T RightTerm { get; }
 
         public CompareResult<T> Negate()

@@ -25,6 +25,7 @@ namespace ChainComparable
         }
 
         [AllowNull]
+        [MaybeNull]
         public T Value { get; }
 
         private readonly string _stringValue;
