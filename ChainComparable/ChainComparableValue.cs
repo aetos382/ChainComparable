@@ -14,10 +14,9 @@ namespace ChainComparable
             this._valueHolder = new ValueHolder<T>(value);
         }
 
-        [AllowNull]
-        [MaybeNull]
         public T Value
         {
+            [return: MaybeNull]
             get
             {
                 return this._valueHolder.Value;

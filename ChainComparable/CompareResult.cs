@@ -18,10 +18,9 @@ namespace ChainComparable
 
         public bool Result { get; }
 
-        [AllowNull]
-        [MaybeNull]
         public T RightTerm
         {
+            [return: MaybeNull]
             get
             {
                 return this._valueHolder.Value;
