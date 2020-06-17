@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 
 namespace ChainComparable
 {
@@ -80,7 +79,7 @@ namespace ChainComparable
             ChainComparableValue<T> left,
             [AllowNull] T right)
         {
-            return (left == right).Negate();
+            return !(left == right);
         }
 
         public static CompareResult<T> operator <(
@@ -101,14 +100,14 @@ namespace ChainComparable
             ChainComparableValue<T> left,
             [AllowNull] T right)
         {
-            return (left > right).Negate();
+            return !(left > right);
         }
         
         public static CompareResult<T> operator >=(
             ChainComparableValue<T> left,
             [AllowNull] T right)
         {
-            return (left < right).Negate();
+            return !(left < right);
         }
     }
 }

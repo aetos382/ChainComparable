@@ -39,6 +39,12 @@ namespace ChainComparable
             return new CompareResult<T>(!this.Result, this.RightClause);
         }
 
+        public static CompareResult<T> operator !(
+            CompareResult<T> result)
+        {
+            return result.Negate();
+        }
+
         public bool Equals(
             [AllowNull] T other)
         {
