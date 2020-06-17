@@ -52,7 +52,7 @@ namespace ChainComparable
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(this.Result, this.RightTerm);
+            return _equalityComparer.GetHashCode(this.RightTerm);
         }
         
         public static implicit operator bool(
