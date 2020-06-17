@@ -1,1 +1,9 @@
-ChainComparable
+# ChainComparable
+
+```cs
+if (a < b < c) { /* ... */ }
+```
+
+みたいな比較ってできないのかな、っていうのを試してみたら、できた。
+
+そんだけ。
