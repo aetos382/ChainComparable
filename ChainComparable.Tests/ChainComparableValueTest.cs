@@ -228,8 +228,8 @@ namespace ChainComparable.Tests
             var nullValue = new ChainComparableValue<string>(null);
             var nonNullValue = new ChainComparableValue<string>(string.Empty);
 
-            Assert.True(nullValue.CompareTo(null) > 0);
-            Assert.True(nonNullValue.CompareTo(string.Empty) < 0);
+            Assert.True(nonNullValue.CompareTo(null) > 0);
+            Assert.True(nullValue.CompareTo(string.Empty) < 0);
         }
 
         [Fact]
