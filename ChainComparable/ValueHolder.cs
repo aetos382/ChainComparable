@@ -39,6 +39,11 @@ namespace ChainComparable
 
         public override int GetHashCode()
         {
+            if (this.Value is null)
+            {
+                return 0;
+            }
+
             return _equalityComparer.GetHashCode(this.Value);
         }
 
