@@ -127,17 +127,6 @@ namespace ChainComparable.Tests
 
             Assert.True(a == (b == c));
         }
-        
-        [Fact]
-        public void 四項等値演算カッコつき()
-        {
-            var a = new ChainComparableValue<int>(1);
-            var b = new ChainComparableValue<int>(1);
-            var c = new ChainComparableValue<int>(1);
-            var d = new ChainComparableValue<int>(1);
-
-            Assert.True(a == b == (c == d));
-        }
 
         [Fact]
         public void Tにキャストしてみる()
