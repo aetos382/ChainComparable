@@ -1,4 +1,4 @@
-using Xunit;
+﻿using Xunit;
 
 namespace ChainComparable.Tests
 {
@@ -235,9 +235,25 @@ namespace ChainComparable.Tests
         [Fact]
         public void CompareToでnull同士を比較すると等しい()
         {
-            var result = new ChainComparableValue<string>(null);
+            var value = new ChainComparableValue<string>(null);
 
-            Assert.Equal(0, result.CompareTo(null));
+            Assert.Equal(0, value.CompareTo(null));
+        }
+
+        [Fact]
+        public void GetHashCodeが成功する()
+        {
+            var value = new ChainComparableValue<string>(Any<string>.Value);
+
+            value.GetHashCode();
+        }
+
+        [Fact]
+        public void ToStringが成功する()
+        {
+            var value = new ChainComparableValue<string>(Any<string>.Value);
+
+            value.ToString();
         }
     }
 }

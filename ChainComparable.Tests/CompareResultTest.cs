@@ -115,5 +115,21 @@ namespace ChainComparable.Tests
 
             Assert.Equal(0, result.CompareTo(null));
         }
+
+        [Fact]
+        public void GetHashCodeが成功する()
+        {
+            var result = new CompareResult<int>(Any<bool>.Value, Any<int>.Value);
+
+            result.GetHashCode();
+        }
+
+        [Fact]
+        public void ToStringが成功する()
+        {
+            var result = new CompareResult<int>(Any<bool>.Value, Any<int>.Value);
+
+            result.ToString();
+        }
     }
 }
