@@ -54,7 +54,7 @@ namespace ChainComparable
 
         public override int GetHashCode()
         {
-            return RuntimeHelpers.GetHashCode(this.Value);
+            return HashCode.Combine(this.Value);
         }
 
         public bool Equals(
