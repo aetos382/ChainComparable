@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ChainComparable
@@ -67,42 +67,42 @@ namespace ChainComparable
             in ChainComparableValue<T> left,
             [AllowNull] in T right)
         {
-            return left._valueHolder == right;
+            return left._valueHolder.InternalEquals(right);
         }
 
         public static CompareResult<T> operator !=(
             in ChainComparableValue<T> left,
             [AllowNull] in T right)
         {
-            return left._valueHolder != right;
+            return left._valueHolder.InternalNotEquals(right);
         }
 
         public static CompareResult<T> operator <(
             in ChainComparableValue<T> left,
             [AllowNull] in T right)
         {
-            return left._valueHolder < right;
+            return left._valueHolder.InternalLessThan(right);
         }
 
         public static CompareResult<T> operator >(
             in ChainComparableValue<T> left,
             [AllowNull] in T right)
         {
-            return left._valueHolder > right;
+            return left._valueHolder.InternalGreaterThan(right);
         }
 
         public static CompareResult<T> operator <=(
             in ChainComparableValue<T> left,
             [AllowNull] in T right)
         {
-            return left._valueHolder <= right;
+            return left._valueHolder.InternalLessThanOrEqual(right);
         }
         
         public static CompareResult<T> operator >=(
             in ChainComparableValue<T> left,
             [AllowNull] in T right)
         {
-            return left._valueHolder >= right;
+            return left._valueHolder.InternalGreaterThanOrEqual(right);
         }
 
         private readonly ValueHolder<T> _valueHolder;

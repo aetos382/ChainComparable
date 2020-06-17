@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -67,46 +67,40 @@ namespace ChainComparable
             return _comparer.Compare(this.Value, other);
         }
 
-        public static CompareResult<T> operator ==(
-            in ValueHolder<T> left,
-            [AllowNull] in T right)
+        public CompareResult<T> InternalEquals(
+            [AllowNull] in T other)
         {
-            return new CompareResult<T>(_equalityComparer.Equals(left.Value, right), right);
+            return new CompareResult<T>(_equalityComparer.Equals(this.Value, other), other);
         }
 
-        public static CompareResult<T> operator !=(
-            in ValueHolder<T> left,
-            [AllowNull] in T right)
+        public CompareResult<T> InternalNotEquals(
+            [AllowNull] in T other)
         {
-            return !(left == right);
+            return this.InternalEquals(other).Negate();
         }
 
-        public static CompareResult<T> operator <(
-            in ValueHolder<T> left,
-            [AllowNull] in T right)
+        public CompareResult<T> InternalLessThan(
+            [AllowNull] in T other)
         {
-            return new CompareResult<T>(_comparer.Compare(left.Value, right) < 0, right);
+            return new CompareResult<T>(_comparer.Compare(this.Value, other) < 0, other);
         }
 
-        public static CompareResult<T> operator >(
-            in ValueHolder<T> left,
-            [AllowNull] in T right)
+        public CompareResult<T> InternalGreaterThan(
+            [AllowNull] in T other)
         {
-            return new CompareResult<T>(_comparer.Compare(left.Value, right) > 0, right);
+            return new CompareResult<T>(_comparer.Compare(this.Value, other) > 0, other);
         }
 
-        public static CompareResult<T> operator <=(
-            in ValueHolder<T> left,
-            [AllowNull] in T right)
+        public CompareResult<T> InternalLessThanOrEqual(
+            [AllowNull] in T other)
         {
-            return !(left > right);
+            return this.InternalGreaterThan(other).Negate();
         }
 
-        public static CompareResult<T> operator >=(
-            in ValueHolder<T> left,
-            [AllowNull] in T right)
+        public CompareResult<T> InternalGreaterThanOrEqual(
+            [AllowNull] in T other)
         {
-            return !(left < right);
+            return this.InternalLessThan(other).Negate();
         }
 
         private static readonly Comparer<T> _comparer = Comparer<T>.Default;
