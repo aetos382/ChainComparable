@@ -31,7 +31,7 @@ namespace ChainComparable.Tests
         [Fact]
         public void 左がnullの場合は負の値()
         {
-            int result = Comparer.SafeCompare(null, "100");
+            int result = Comparer.SafeCompare(null, string.Empty);
 
             Assert.True(result < 0);
         }
@@ -39,7 +39,7 @@ namespace ChainComparable.Tests
         [Fact]
         public void 右がnullの場合は正の値()
         {
-            int result = Comparer.SafeCompare("100", null);
+            int result = Comparer.SafeCompare(string.Empty, null);
 
             Assert.True(result > 0);
         }
