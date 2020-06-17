@@ -136,7 +136,12 @@ namespace ChainComparable.Tests
             var c = new ChainComparableValue<int>(1);
             var d = new ChainComparableValue<int>(1);
 
+// カッコを消すと結果が変わっちゃうのでダメです
+#pragma warning disable IDE0047
+
             Assert.True((a == b) == (c == d));
+
+#pragma warning restore IDE0047
         }
 
         [Fact]
