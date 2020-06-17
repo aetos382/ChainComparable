@@ -13,15 +13,7 @@ namespace ChainComparable
             [AllowNull] T value)
         {
             this.Value = value;
-
-            if (value is null)
-            {
-                this._stringValue = string.Empty;
-            }
-            else
-            {
-                this._stringValue = value.ToString();
-            }
+            this._stringValue = value?.ToString() ?? string.Empty;
         }
 
         [AllowNull]
