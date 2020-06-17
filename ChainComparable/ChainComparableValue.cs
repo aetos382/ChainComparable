@@ -44,12 +44,12 @@ namespace ChainComparable
         public override bool Equals(
             object? obj)
         {
-            if (!(obj is ChainComparableValue<T> other))
+            if (obj is null)
             {
-                return false;
+                return this.Value is null;
             }
 
-            return this.Equals(other);
+            return (obj is T other) && this.Equals(other);
         }
 
         public override int GetHashCode()
