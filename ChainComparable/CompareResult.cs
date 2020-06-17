@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ChainComparable
@@ -51,11 +51,15 @@ namespace ChainComparable
             return this._valueHolder.Equals(obj);
         }
 
+#pragma warning disable IDE0070
+
         public override int GetHashCode()
         {
             return this._valueHolder.GetHashCode();
         }
-        
+
+#pragma warning restore IDE0070
+
         public static implicit operator bool(
             in CompareResult<T> result)
         {

@@ -35,10 +35,14 @@ namespace ChainComparable
             return this._valueHolder.Equals(obj);
         }
 
+#pragma warning disable IDE0070
+
         public override int GetHashCode()
         {
             return this._valueHolder.GetHashCode();
         }
+
+#pragma warning restore IDE0070
 
         public bool Equals(
             [AllowNull] T other)
