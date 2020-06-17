@@ -22,14 +22,14 @@ namespace ChainComparable
         public T RightClause { get; }
 
         public static implicit operator bool(
-            CompareResult<T> result)
+            in CompareResult<T> result)
         {
             return result.Result;
         }
 
         [return: MaybeNull]
         public static implicit operator T(
-            CompareResult<T> result)
+            in CompareResult<T> result)
         {
             return result.RightClause;
         }
@@ -40,7 +40,7 @@ namespace ChainComparable
         }
 
         public static CompareResult<T> operator !(
-            CompareResult<T> result)
+            in CompareResult<T> result)
         {
             return result.Negate();
         }
@@ -74,43 +74,43 @@ namespace ChainComparable
         }
 
         public static CompareResult<T> operator ==(
-            CompareResult<T> left,
-            [AllowNull] T right)
+            in CompareResult<T> left,
+            [AllowNull] in T right)
         {
             return new CompareResult<T>(Comparer.SafeCompare(left.RightClause, right) == 0, right);
         }
 
         public static CompareResult<T> operator !=(
-            CompareResult<T> left,
-            [AllowNull] T right)
+            in CompareResult<T> left,
+            [AllowNull] in T right)
         {
             return !(left == right);
         }
 
         public static CompareResult<T> operator <(
-            CompareResult<T> left,
-            [AllowNull] T right)
+            in CompareResult<T> left,
+            [AllowNull] in T right)
         {
             return new CompareResult<T>(Comparer.SafeCompare(left.RightClause, right) < 0, right);
         }
 
         public static CompareResult<T> operator >(
-            CompareResult<T> left,
-            [AllowNull] T right)
+            in CompareResult<T> left,
+            [AllowNull] in T right)
         {
             return new CompareResult<T>(Comparer.SafeCompare(left.RightClause, right) > 0, right);
         }
 
         public static CompareResult<T> operator <=(
-            CompareResult<T> left,
-            [AllowNull] T right)
+            in CompareResult<T> left,
+            [AllowNull] in T right)
         {
             return !(left > right);
         }
 
         public static CompareResult<T> operator >=(
-            CompareResult<T> left,
-            [AllowNull] T right)
+            in CompareResult<T> left,
+            [AllowNull] in T right)
         {
             return !(left < right);
         }

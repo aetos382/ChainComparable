@@ -28,7 +28,7 @@ namespace ChainComparable
 
         [return: MaybeNull]
         public static implicit operator T(
-            ChainComparableValue<T> value)
+            in ChainComparableValue<T> value)
         {
             return value.Value;
         }
@@ -69,43 +69,43 @@ namespace ChainComparable
         }
 
         public static CompareResult<T> operator ==(
-            ChainComparableValue<T> left,
-            [AllowNull] T right)
+            in ChainComparableValue<T> left,
+            [AllowNull] in T right)
         {
             return new CompareResult<T>(Comparer.SafeCompare(left.Value, right) == 0, right);
         }
 
         public static CompareResult<T> operator !=(
-            ChainComparableValue<T> left,
-            [AllowNull] T right)
+            in ChainComparableValue<T> left,
+            [AllowNull] in T right)
         {
             return !(left == right);
         }
 
         public static CompareResult<T> operator <(
-            ChainComparableValue<T> left,
-            [AllowNull] T right)
+            in ChainComparableValue<T> left,
+            [AllowNull] in T right)
         {
             return new CompareResult<T>(Comparer.SafeCompare(left.Value, right) < 0, right);
         }
 
         public static CompareResult<T> operator >(
-            ChainComparableValue<T> left,
-            [AllowNull] T right)
+            in ChainComparableValue<T> left,
+            [AllowNull] in T right)
         {
             return new CompareResult<T>(Comparer.SafeCompare(left.Value, right) > 0, right);
         }
 
         public static CompareResult<T> operator <=(
-            ChainComparableValue<T> left,
-            [AllowNull] T right)
+            in ChainComparableValue<T> left,
+            [AllowNull] in T right)
         {
             return !(left > right);
         }
         
         public static CompareResult<T> operator >=(
-            ChainComparableValue<T> left,
-            [AllowNull] T right)
+            in ChainComparableValue<T> left,
+            [AllowNull] in T right)
         {
             return !(left < right);
         }
