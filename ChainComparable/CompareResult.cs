@@ -84,7 +84,7 @@ namespace ChainComparable
             CompareResult<T> left,
             [AllowNull] T right)
         {
-            return (left == right).Negate();
+            return !(left == right);
         }
 
         public static CompareResult<T> operator <(
@@ -105,14 +105,14 @@ namespace ChainComparable
             CompareResult<T> left,
             [AllowNull] T right)
         {
-            return (left > right).Negate();
+            return !(left > right);
         }
 
         public static CompareResult<T> operator >=(
             CompareResult<T> left,
             [AllowNull] T right)
         {
-            return (left < right).Negate();
+            return !(left < right);
         }
     }
 }
