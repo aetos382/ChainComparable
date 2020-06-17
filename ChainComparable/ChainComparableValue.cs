@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace ChainComparable
@@ -9,22 +10,24 @@ namespace ChainComparable
         where T : IComparable<T>
     {
         public ChainComparableValue(
-            T value)
+            [AllowNull] T value)
         {
             this.Value = value;
 
-            if (value is {})
-            {
-                this._stringValue = value.ToString();
-            }
-            else
+            if (value is null)
             {
                 this._stringValue = string.Empty;
             }
+            else
+            {
+                this._stringValue = value.ToString();
+            }
         }
 
+        [MaybeNull]
         public T Value { get; }
 
+        [return: MaybeNull]
         public static implicit operator T(
             ChainComparableValue<T> value)
         {
@@ -55,55 +58,55 @@ namespace ChainComparable
         }
 
         public bool Equals(
-            T other)
+            [AllowNull] T other)
         {
             return this.CompareTo(other) == 0;
         }
 
         public int CompareTo(
-            T other)
+            [AllowNull] T other)
         {
             return Comparer.SafeCompare(this.Value, other);
         }
 
         public static CompareResult<T> operator ==(
             ChainComparableValue<T> left,
-            T right)
+            [AllowNull] T right)
         {
             return new CompareResult<T>(Comparer.SafeCompare(left.Value, right) == 0, right);
         }
 
         public static CompareResult<T> operator !=(
             ChainComparableValue<T> left,
-            T right)
+            [AllowNull] T right)
         {
             return (left == right).Negate();
         }
 
         public static CompareResult<T> operator <(
             ChainComparableValue<T> left,
-            T right)
+            [AllowNull] T right)
         {
             return new CompareResult<T>(Comparer.SafeCompare(left.Value, right) < 0, right);
         }
 
         public static CompareResult<T> operator >(
             ChainComparableValue<T> left,
-            T right)
+            [AllowNull] T right)
         {
             return new CompareResult<T>(Comparer.SafeCompare(left.Value, right) > 0, right);
         }
 
         public static CompareResult<T> operator <=(
             ChainComparableValue<T> left,
-            T right)
+            [AllowNull] T right)
         {
             return (left > right).Negate();
         }
         
         public static CompareResult<T> operator >=(
             ChainComparableValue<T> left,
-            T right)
+            [AllowNull] T right)
         {
             return (left < right).Negate();
         }

@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ChainComparable
 {
@@ -7,7 +8,7 @@ namespace ChainComparable
     {
         public CompareResult(
             bool result,
-            T rightClause)
+            [AllowNull] T rightClause)
         {
             this.Result = result;
             this.RightClause = rightClause;
@@ -15,6 +16,7 @@ namespace ChainComparable
 
         public bool Result { get; }
 
+        [MaybeNull]
         public T RightClause { get; }
 
         public static implicit operator bool(
@@ -23,6 +25,7 @@ namespace ChainComparable
             return result.Result;
         }
 
+        [return: MaybeNull]
         public static implicit operator T(
             CompareResult<T> result)
         {
@@ -47,42 +50,42 @@ namespace ChainComparable
 
         public static CompareResult<T> operator ==(
             CompareResult<T> left,
-            T right)
+            [AllowNull] T right)
         {
             return new CompareResult<T>(Comparer.SafeCompare(left.RightClause, right) == 0, right);
         }
 
         public static CompareResult<T> operator !=(
             CompareResult<T> left,
-            T right)
+            [AllowNull] T right)
         {
             return (left == right).Negate();
         }
 
         public static CompareResult<T> operator <(
             CompareResult<T> left,
-            T right)
+            [AllowNull] T right)
         {
             return new CompareResult<T>(Comparer.SafeCompare(left.RightClause, right) < 0, right);
         }
 
         public static CompareResult<T> operator >(
             CompareResult<T> left,
-            T right)
+            [AllowNull] T right)
         {
             return new CompareResult<T>(Comparer.SafeCompare(left.RightClause, right) > 0, right);
         }
 
         public static CompareResult<T> operator <=(
             CompareResult<T> left,
-            T right)
+            [AllowNull] T right)
         {
             return (left > right).Negate();
         }
 
         public static CompareResult<T> operator >=(
             CompareResult<T> left,
-            T right)
+            [AllowNull] T right)
         {
             return (left < right).Negate();
         }

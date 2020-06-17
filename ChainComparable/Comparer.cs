@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ChainComparable
 {
     internal static class Comparer
     {
         public static int SafeCompare<T>(
-            T left,
-            T right)
+            [AllowNull] T left,
+            [AllowNull] T right)
             where T : IComparable<T>
         {
             if (object.ReferenceEquals(left, right))
