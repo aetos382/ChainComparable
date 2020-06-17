@@ -97,6 +97,26 @@ namespace ChainComparable.Tests
 
             Assert.True(a == b != c);
         }
+        
+        [Fact]
+        public void 三項小なり等値演算()
+        {
+            var a = new ChainComparableValue<int>(1);
+            var b = new ChainComparableValue<int>(2);
+            var c = new ChainComparableValue<int>(3);
+
+            Assert.True(a <= b <= c);
+        }
+
+        [Fact]
+        public void 三項大なり等値演算()
+        {
+            var a = new ChainComparableValue<int>(3);
+            var b = new ChainComparableValue<int>(2);
+            var c = new ChainComparableValue<int>(1);
+
+            Assert.True(a >= b >= c);
+        }
 
         [Fact]
         public void 三項小なり演算カッコつき()
