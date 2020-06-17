@@ -24,7 +24,7 @@ namespace ChainComparable
             }
         }
 
-        [MaybeNull]
+        [AllowNull]
         public T Value { get; }
 
         [return: MaybeNull]

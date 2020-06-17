@@ -18,7 +18,7 @@ namespace ChainComparable
 
         public bool Result { get; }
 
-        [MaybeNull]
+        [AllowNull]
         public T RightClause { get; }
 
         public static implicit operator bool(
