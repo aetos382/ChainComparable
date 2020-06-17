@@ -1,4 +1,4 @@
-﻿using Xunit;
+using Xunit;
 
 namespace ChainComparable.Tests
 {
@@ -151,85 +151,85 @@ namespace ChainComparable.Tests
         [Fact]
         public void Tにキャストしてみる()
         {
-            var result = new ChainComparableValue<int>(100);
+            var value = new ChainComparableValue<int>(100);
 
-            Assert.Equal(100, result);
+            Assert.Equal(100, value);
         }
 
         [Fact]
         public void Equalsのテスト()
         {
-            var result = new ChainComparableValue<int>(100);
+            var value = new ChainComparableValue<int>(100);
 
-            Assert.False(result.Equals(99));
-            Assert.True(result.Equals(100));
-            Assert.False(result.Equals(101));
+            Assert.False(value.Equals(99));
+            Assert.True(value.Equals(100));
+            Assert.False(value.Equals(101));
         }
         
         [Fact]
         public void Equals_objectのテスト()
         {
-            var result = new ChainComparableValue<int>(100);
+            var value = new ChainComparableValue<int>(100);
 
-            Assert.False(result.Equals((object)99));
-            Assert.True(result.Equals((object)100));
-            Assert.False(result.Equals((object)101));
+            Assert.False(value.Equals((object)99));
+            Assert.True(value.Equals((object)100));
+            Assert.False(value.Equals((object)101));
         }
 
         [Fact]
         public void Equalsでnullとnull以外を比較すると等しくない()
         {
-            var nullResult = new ChainComparableValue<string>(null);
-            var nonNullResult = new ChainComparableValue<string>(string.Empty);
+            var nullValue = new ChainComparableValue<string>(null);
+            var nonNullValue = new ChainComparableValue<string>(string.Empty);
 
-            Assert.False(nonNullResult.Equals(null));
-            Assert.False(nullResult.Equals(string.Empty));
+            Assert.False(nonNullValue.Equals(null));
+            Assert.False(nullValue.Equals(string.Empty));
         }
         
         [Fact]
         public void Equals_objectでnullとnull以外を比較すると等しくない()
         {
-            var nullResult = new ChainComparableValue<string>(null);
-            var nonNullResult = new ChainComparableValue<string>(string.Empty);
+            var nullValue = new ChainComparableValue<string>(null);
+            var nonNullValue = new ChainComparableValue<string>(string.Empty);
 
-            Assert.False(nonNullResult.Equals((object)null));
-            Assert.False(nullResult.Equals((object)string.Empty));
+            Assert.False(nonNullValue.Equals((object)null));
+            Assert.False(nullValue.Equals((object)string.Empty));
         }
 
         [Fact]
         public void Equalsでnull同士を比較すると等しい()
         {
-            var result = new ChainComparableValue<string>(null);
+            var value = new ChainComparableValue<string>(null);
 
-            Assert.True(result.Equals(null));
+            Assert.True(value.Equals(null));
         }
         
         [Fact]
         public void Equals_objectでnull同士を比較すると等しい()
         {
-            var result = new ChainComparableValue<string>(null);
+            var value = new ChainComparableValue<string>(null);
 
-            Assert.True(result.Equals((object)null));
+            Assert.True(value.Equals((object)null));
         }
 
         [Fact]
         public void CompareToのテスト()
         {
-            var result = new ChainComparableValue<int>(100);
+            var value = new ChainComparableValue<int>(100);
 
-            Assert.True(result.CompareTo(99) > 0);
-            Assert.True(result.CompareTo(100) == 0);
-            Assert.True(result.CompareTo(99) > 0);
+            Assert.True(value.CompareTo(99) > 0);
+            Assert.True(value.CompareTo(100) == 0);
+            Assert.True(value.CompareTo(99) > 0);
         }
 
         [Fact]
         public void CompareToでnullとnull以外の値を比較するとnullは最小値とみなされる()
         {
-            var nullResult = new ChainComparableValue<string>(null);
-            var nonNullResult = new ChainComparableValue<string>(string.Empty);
+            var nullValue = new ChainComparableValue<string>(null);
+            var nonNullValue = new ChainComparableValue<string>(string.Empty);
 
-            Assert.True(nonNullResult.CompareTo(null) > 0);
-            Assert.True(nullResult.CompareTo(string.Empty) < 0);
+            Assert.True(nullValue.CompareTo(null) > 0);
+            Assert.True(nonNullValue.CompareTo(string.Empty) < 0);
         }
 
         [Fact]
