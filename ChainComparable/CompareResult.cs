@@ -1,9 +1,11 @@
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ChainComparable
 {
-    public readonly struct CompareResult<T>
+    public readonly struct CompareResult<T> :
+        IEquatable<T>,
+        IComparable<T>
         where T : IComparable<T>
     {
         public CompareResult(
@@ -37,15 +39,32 @@ namespace ChainComparable
             return new CompareResult<T>(!this.Result, this.RightClause);
         }
 
+        public bool Equals(
+            [AllowNull] T other)
+        {
+            return this.CompareTo(other) == 0;
+        }
+
+        public int CompareTo(
+            [AllowNull] T other)
+        {
+            return Comparer.SafeCompare(this.RightClause, other);
+        }
+
         public override bool Equals(
             object? obj)
         {
-            if (!(obj is T t))
+            if (!(obj is T other))
             {
                 return false;
             }
 
-            return this.Equals(t);
+            return this.Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.Result, this.RightClause);
         }
 
         public static CompareResult<T> operator ==(
