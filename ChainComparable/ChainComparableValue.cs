@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ChainComparable
@@ -12,7 +11,7 @@ namespace ChainComparable
         public ChainComparableValue(
             [AllowNull] T value)
         {
-            this.Value = value;
+            this._valueHolder = new ValueHolder<T>(value);
 
             if (value is null)
             {
@@ -26,7 +25,13 @@ namespace ChainComparable
 
         [AllowNull]
         [MaybeNull]
-        public T Value { get; }
+        public T Value
+        {
+            get
+            {
+                return this._valueHolder.Value;
+            }
+        }
 
         private readonly string _stringValue;
 
@@ -38,29 +43,24 @@ namespace ChainComparable
         public override bool Equals(
             object? obj)
         {
-            if (obj is null)
-            {
-                return this.Value is null;
-            }
-
-            return (obj is T other) && this.Equals(other);
+            return this._valueHolder.Equals(obj);
         }
 
         public override int GetHashCode()
         {
-            return _equalityComparer.GetHashCode(this.Value);
+            return this._valueHolder.GetHashCode();
         }
 
         public bool Equals(
             [AllowNull] T other)
         {
-            return _equalityComparer.Equals(this.Value, other);
+            return this._valueHolder.Equals(other);
         }
 
         public int CompareTo(
             [AllowNull] T other)
         {
-            return _comparer.Compare(this.Value, other);
+            return this._valueHolder.CompareTo(other);
         }
         
         [return: MaybeNull]
@@ -74,46 +74,44 @@ namespace ChainComparable
             in ChainComparableValue<T> left,
             [AllowNull] in T right)
         {
-            return new CompareResult<T>(_equalityComparer.Equals(left.Value, right), right);
+            return left._valueHolder == right;
         }
 
         public static CompareResult<T> operator !=(
             in ChainComparableValue<T> left,
             [AllowNull] in T right)
         {
-            return !(left == right);
+            return left._valueHolder != right;
         }
 
         public static CompareResult<T> operator <(
             in ChainComparableValue<T> left,
             [AllowNull] in T right)
         {
-            return new CompareResult<T>(_comparer.Compare(left.Value, right) < 0, right);
+            return left._valueHolder < right;
         }
 
         public static CompareResult<T> operator >(
             in ChainComparableValue<T> left,
             [AllowNull] in T right)
         {
-            return new CompareResult<T>(_comparer.Compare(left.Value, right) > 0, right);
+            return left._valueHolder > right;
         }
 
         public static CompareResult<T> operator <=(
             in ChainComparableValue<T> left,
             [AllowNull] in T right)
         {
-            return !(left > right);
+            return left._valueHolder <= right;
         }
         
         public static CompareResult<T> operator >=(
             in ChainComparableValue<T> left,
             [AllowNull] in T right)
         {
-            return !(left < right);
+            return left._valueHolder >= right;
         }
 
-        private static readonly Comparer<T> _comparer = Comparer<T>.Default;
-
-        private static readonly EqualityComparer<T> _equalityComparer = EqualityComparer<T>.Default;
+        private readonly ValueHolder<T> _valueHolder;
     }
 }
