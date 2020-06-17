@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Common;
 
 namespace ChainComparable
 {
@@ -21,6 +22,18 @@ namespace ChainComparable
             CompareResult<T> result)
         {
             return result.Result;
+        }
+
+        public static bool operator true(
+            CompareResult<T> result)
+        {
+            return result.Result;
+        }
+
+        public static bool operator false(
+            CompareResult<T> result)
+        {
+            return !result;
         }
 
         public static implicit operator T(
