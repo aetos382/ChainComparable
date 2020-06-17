@@ -127,7 +127,7 @@ namespace ChainComparable.Tests
 
             Assert.True(a == (b == c));
         }
-                        
+        
         [Fact]
         public void 四項等値演算カッコつき()
         {
