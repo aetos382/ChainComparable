@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainComparable", "ChainComparable\ChainComparable.csproj", "{36D76D84-72BB-4050-BEEA-590613A859BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainComparable.Tests", "ChainComparable.Tests\ChainComparable.Tests.csproj", "{2286C759-EFDB-487B-A6FF-6D7D20ED4359}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36D76D84-72BB-4050-BEEA-590613A859BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36D76D84-72BB-4050-BEEA-590613A859BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36D76D84-72BB-4050-BEEA-590613A859BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36D76D84-72BB-4050-BEEA-590613A859BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2286C759-EFDB-487B-A6FF-6D7D20ED4359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2286C759-EFDB-487B-A6FF-6D7D20ED4359}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2286C759-EFDB-487B-A6FF-6D7D20ED4359}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2286C759-EFDB-487B-A6FF-6D7D20ED4359}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A715563B-045C-47A2-BD32-2FFF409F4FDA}
+	EndGlobalSection
+EndGlobal
