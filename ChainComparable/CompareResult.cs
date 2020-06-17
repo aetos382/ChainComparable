@@ -13,13 +13,13 @@ namespace ChainComparable
             [AllowNull] T rightClause)
         {
             this.Result = result;
-            this.RightClause = rightClause;
+            this.RightTerm = rightClause;
         }
 
         public bool Result { get; }
 
         [AllowNull]
-        public T RightClause { get; }
+        public T RightTerm { get; }
 
         public static implicit operator bool(
             in CompareResult<T> result)
@@ -31,18 +31,12 @@ namespace ChainComparable
         public static implicit operator T(
             in CompareResult<T> result)
         {
-            return result.RightClause;
+            return result.RightTerm;
         }
 
         public CompareResult<T> Negate()
         {
-            return new CompareResult<T>(!this.Result, this.RightClause);
-        }
-
-        public static CompareResult<T> operator !(
-            in CompareResult<T> result)
-        {
-            return result.Negate();
+            return new CompareResult<T>(!this.Result, this.RightTerm);
         }
 
         public bool Equals(
@@ -54,7 +48,7 @@ namespace ChainComparable
         public int CompareTo(
             [AllowNull] T other)
         {
-            return Comparer.SafeCompare(this.RightClause, other);
+            return Comparer.SafeCompare(this.RightTerm, other);
         }
 
         public override bool Equals(
@@ -62,7 +56,7 @@ namespace ChainComparable
         {
             if (obj is null)
             {
-                return this.RightClause is null;
+                return this.RightTerm is null;
             }
 
             return (obj is T other) && this.Equals(other);
@@ -70,14 +64,20 @@ namespace ChainComparable
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(this.Result, this.RightClause);
+            return HashCode.Combine(this.Result, this.RightTerm);
+        }
+        
+        public static CompareResult<T> operator !(
+            in CompareResult<T> result)
+        {
+            return result.Negate();
         }
 
         public static CompareResult<T> operator ==(
             in CompareResult<T> left,
             [AllowNull] in T right)
         {
-            return new CompareResult<T>(Comparer.SafeCompare(left.RightClause, right) == 0, right);
+            return new CompareResult<T>(Comparer.SafeCompare(left.RightTerm, right) == 0, right);
         }
 
         public static CompareResult<T> operator !=(
@@ -91,14 +91,14 @@ namespace ChainComparable
             in CompareResult<T> left,
             [AllowNull] in T right)
         {
-            return new CompareResult<T>(Comparer.SafeCompare(left.RightClause, right) < 0, right);
+            return new CompareResult<T>(Comparer.SafeCompare(left.RightTerm, right) < 0, right);
         }
 
         public static CompareResult<T> operator >(
             in CompareResult<T> left,
             [AllowNull] in T right)
         {
-            return new CompareResult<T>(Comparer.SafeCompare(left.RightClause, right) > 0, right);
+            return new CompareResult<T>(Comparer.SafeCompare(left.RightTerm, right) > 0, right);
         }
 
         public static CompareResult<T> operator <=(
