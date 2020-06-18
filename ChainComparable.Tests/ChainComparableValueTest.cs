@@ -9,6 +9,14 @@ namespace ChainComparable.Tests
     public class ChainComparableValueTest
     {
         [Fact]
+        public void 初期化()
+        {
+            var value = new ChainComparableValue<int>(1);
+
+            Assert.Equal(1, value.Value);
+        }
+
+        [Fact]
         public void 二項等値演算()
         {
             var a = new ChainComparableValue<int>(1);

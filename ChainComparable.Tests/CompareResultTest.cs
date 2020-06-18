@@ -7,6 +7,16 @@ namespace ChainComparable.Tests
     public class CompareResultTest
     {
         [Fact]
+        public void 初期化()
+        {
+            var result = new CompareResult<int>(true, 1, 2);
+
+            Assert.True(result.Result);
+            Assert.Equal(1, result.LeftValue);
+            Assert.Equal(2, result.RightValue);
+        }
+
+        [Fact]
         // ReSharper disable once InconsistentNaming
         public void boolにキャストしてみる()
         {
@@ -18,13 +28,33 @@ namespace ChainComparable.Tests
         }
 
         [Fact]
-        public void Negateのテスト()
+        public void NegateするとResultが反転すること()
         {
             var trueResult = new CompareResult<int>(true, Any<int>.Value, Any<int>.Value);
-            var falseResult = new CompareResult<int>(false, Any<int>.Value, Any<int>.Value);
 
-            Assert.False(trueResult.Negate());
-            Assert.True(falseResult.Negate());
+            Assert.True(trueResult.Result);
+
+            var negatedResult = trueResult.Negate();
+
+            Assert.False(negatedResult.Result);
+
+            var negatedResult2 = negatedResult.Negate();
+
+            Assert.True(negatedResult2.Result);
+        }
+
+        [Fact]
+        public void NegateしてもLeftValueとRightValueは変わらないこと()
+        {
+            var result = new CompareResult<int>(Any<bool>.Value, 1, 2);
+
+            Assert.Equal(1, result.LeftValue);
+            Assert.Equal(2, result.RightValue);
+
+            var negatedResult = result.Negate();
+
+            Assert.Equal(1, negatedResult.LeftValue);
+            Assert.Equal(2, negatedResult.RightValue);
         }
 
         [Fact]
