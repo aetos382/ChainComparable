@@ -129,7 +129,7 @@ namespace ChainComparable.Tests
             var a = 1;
             var b = new ChainComparableValue<int>(2);
 
-            Assert.True(a < b);
+            Assert.True(a <= b);
         }
 
         [Fact]
@@ -138,7 +138,7 @@ namespace ChainComparable.Tests
             var a = new ChainComparableValue<int>(1);
             var b = 2;
 
-            Assert.True(a < b);
+            Assert.True(a <= b);
         }
 
         [Fact]
@@ -156,7 +156,7 @@ namespace ChainComparable.Tests
             var a = 2;
             var b = new ChainComparableValue<int>(1);
 
-            Assert.True(a > b);
+            Assert.True(a >= b);
         }
 
         [Fact]
@@ -165,7 +165,7 @@ namespace ChainComparable.Tests
             var a = new ChainComparableValue<int>(2);
             var b = 1;
 
-            Assert.True(a > b);
+            Assert.True(a >= b);
         }
 
         [Fact]
