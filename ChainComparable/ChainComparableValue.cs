@@ -46,7 +46,7 @@ namespace ChainComparable
 
         public override int GetHashCode()
         {
-            return ChainComparer<T>.InternalGetHashCode(this.Value);
+            return HashCode.Combine(this.Value);
         }
 
         public bool Equals(
