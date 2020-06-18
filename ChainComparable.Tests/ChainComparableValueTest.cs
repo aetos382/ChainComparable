@@ -136,7 +136,7 @@ namespace ChainComparable.Tests
         }
 
         [Fact]
-        public void 三項小なり演算カッコつき()
+        public void 三項小なり演算_カッコつき()
         {
             var a = new ChainComparableValue<int>(1);
             var b = new ChainComparableValue<int>(2);
@@ -144,12 +144,12 @@ namespace ChainComparable.Tests
 
             Assert.True(a < (b < c));
 
-            // これ、今はこうだけど、いいのかそれで？
+            // TODO: これ、今はこうだけど、いいのかそれで？
             Assert.True(a < c && b < c);
         }
         
         [Fact]
-        public void 三項大なり演算カッコつき()
+        public void 三項大なり演算_カッコつき()
         {
             var a = new ChainComparableValue<int>(3);
             var b = new ChainComparableValue<int>(2);
@@ -157,12 +157,12 @@ namespace ChainComparable.Tests
 
             Assert.True(a > (b > c));
 
-            // 同上
+            // TODO: 同上
             Assert.True(a > c && b > c);
         }
                 
         [Fact]
-        public void 三項等値演算カッコつき()
+        public void 三項等値演算_カッコつき()
         {
             var a = new ChainComparableValue<int>(1);
             var b = new ChainComparableValue<int>(1);
@@ -170,6 +170,19 @@ namespace ChainComparable.Tests
 
             Assert.True(a == (b == c));
             Assert.True(a == b && b == c);
+        }
+                        
+        [Fact]
+        public void 三項小なり_大なり演算_カッコつき()
+        {
+            var a = new ChainComparableValue<int>(1);
+            var b = new ChainComparableValue<int>(5);
+            var c = new ChainComparableValue<int>(3);
+
+            Assert.True(a < (b > c));
+
+            // TODO: この解釈が自然とはとても思えない…
+            Assert.True(a < c && b > c);
         }
 
         [Fact]
