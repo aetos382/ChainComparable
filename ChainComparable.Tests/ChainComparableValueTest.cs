@@ -404,7 +404,7 @@ namespace ChainComparable.Tests
         [Fact]
         public void GetHashCodeはnullだと0を返す()
         {
-            var value = new ChainComparableValue<string>(Any<string>.Value);
+            var value = new ChainComparableValue<string>(null);
 
             Assert.Equal(0, value.GetHashCode());
         }
