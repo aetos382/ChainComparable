@@ -68,16 +68,24 @@ namespace ChainComparable
             [AllowNull] in T left,
             [AllowNull] in T right)
         {
+#pragma warning disable CS8604 // false positive
+
             return new CompareResult<T>(
                 _equalityComparer.Equals(left, right),
                 left, right);
+
+#pragma warning restore CS8604
         }
 
         internal static int InternalCompare(
             [AllowNull] in T left,
             [AllowNull] in T right)
         {
+#pragma warning disable CS8604 // false positive
+
             return _comparer.Compare(left, right);
+
+#pragma warning restore CS8604
         }
 
         internal static CompareResult<T> InternalNotEquals(

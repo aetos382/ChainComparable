@@ -35,7 +35,7 @@ namespace ChainComparable.Tests
         {
             Assert.Throws<ArgumentNullException>(
                 () => {
-                    ChainComparer<int>.EqualityComparer = null;
+                    ChainComparer<int>.EqualityComparer = null!;
                 });
         }
 
@@ -44,7 +44,7 @@ namespace ChainComparable.Tests
         {
             Assert.Throws<ArgumentNullException>(
                 () => {
-                    ChainComparer<int>.Comparer = null;
+                    ChainComparer<int>.Comparer = null!;
                 });
         }
     }

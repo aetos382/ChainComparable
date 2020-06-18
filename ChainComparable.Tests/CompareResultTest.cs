@@ -7,6 +7,7 @@ namespace ChainComparable.Tests
     public class CompareResultTest
     {
         [Fact]
+        // ReSharper disable once InconsistentNaming
         public void boolにキャストしてみる()
         {
             var trueResult = new CompareResult<int>(true, Any<int>.Value, Any<int>.Value);
