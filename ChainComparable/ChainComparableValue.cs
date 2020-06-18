@@ -1,4 +1,4 @@
-#pragma warning disable CA1066
+﻿#pragma warning disable CA1066
 #pragma warning disable CA2225
 
 using System;
@@ -41,8 +41,7 @@ namespace ChainComparable
             }
 
             return
-                (obj is T other) &&
-                ChainComparer<T>.InternalEquals(this.Value, other).Result;
+                (obj is T other) && this.Equals(other);
         }
 
         public override int GetHashCode()
