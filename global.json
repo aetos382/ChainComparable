@@ -1,0 +1,9 @@
+{
+    "$schema": "https://schemastore.azurewebsites.net/schemas/json/global.json",
+
+    "sdk": {
+        "version": "3.1.0",
+        "rollForward": "latestMajor",
+        "allowPrerelease": false
+    }
+}
