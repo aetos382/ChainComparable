@@ -1,5 +1,7 @@
 ﻿#pragma warning disable CA1707
 
+using System.Diagnostics.CodeAnalysis;
+
 using Xunit;
 
 namespace ChainComparable.Tests
@@ -308,6 +310,7 @@ namespace ChainComparable.Tests
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global")]
         public void Equals_objectのテスト()
         {
             var value = new ChainComparableValue<int>(100);
@@ -328,6 +331,7 @@ namespace ChainComparable.Tests
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global")]
         public void Equals_objectでnullとnull以外を比較すると等しくない()
         {
             var nullValue = new ChainComparableValue<string>(null);
@@ -384,9 +388,17 @@ namespace ChainComparable.Tests
         [Fact]
         public void GetHashCodeが成功する()
         {
+            var value = new ChainComparableValue<string>(string.Empty);
+
+            _ = value.GetHashCode();
+        }
+
+        [Fact]
+        public void GetHashCodeはnullだと0を返す()
+        {
             var value = new ChainComparableValue<string>(Any<string>.Value);
 
-            value.GetHashCode();
+            Assert.Equal(0, value.GetHashCode());
         }
 
         [Fact]
@@ -394,7 +406,7 @@ namespace ChainComparable.Tests
         {
             var value = new ChainComparableValue<string>(Any<string>.Value);
 
-            value.ToString();
+            _ = value.ToString();
         }
     }
 }
