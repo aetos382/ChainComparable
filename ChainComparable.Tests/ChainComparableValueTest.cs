@@ -300,6 +300,24 @@ namespace ChainComparable.Tests
         }
 
         [Fact]
+        public void よくわからん複雑なパターン()
+        {
+            var a = new ChainComparableValue<int>(1);
+            var b = new ChainComparableValue<int>(2);
+            var c = new ChainComparableValue<int>(3);
+            var d = new ChainComparableValue<int>(4);
+            var e = new ChainComparableValue<int>(5);
+
+            Assert.True((a < b) < (c < (d < e)));
+
+            Assert.True(
+                a < b &&
+                b < c &&
+                c < d &&
+                d < e);
+        }
+
+        [Fact]
         public void Tにキャストしてみる()
         {
             var value = new ChainComparableValue<int>(100);
