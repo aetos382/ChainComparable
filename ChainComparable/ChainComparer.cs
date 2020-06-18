@@ -13,7 +13,6 @@ namespace ChainComparable
 
         private static IEqualityComparer<T> _equalityComparer = DefaultEqualityComparer;
 
-        [AllowNull]
         public static IEqualityComparer<T> EqualityComparer
         {
             get
@@ -23,7 +22,12 @@ namespace ChainComparable
 
             set
             {
-                _equalityComparer = value ?? DefaultEqualityComparer;
+                if (value is null)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+
+                _equalityComparer = value;
             }
         }
 
@@ -31,7 +35,6 @@ namespace ChainComparable
 
         private static IComparer<T> _comparer = DefaultComparer;
 
-        [AllowNull]
         public static IComparer<T> Comparer
         {
             get
@@ -41,7 +44,12 @@ namespace ChainComparable
 
             set
             {
-                _comparer = value ?? DefaultComparer;
+                if (value is null)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+
+                _comparer = value;
             }
         }
 
