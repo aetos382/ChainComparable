@@ -310,22 +310,22 @@ namespace ChainComparable.Tests
         [Fact]
         public void Equalsのテスト()
         {
-            var value = new ChainComparableValue<int>(100);
+            var value = new ChainComparableValue<int>(2);
 
-            Assert.False(value.Equals(99));
-            Assert.True(value.Equals(100));
-            Assert.False(value.Equals(101));
+            Assert.False(value.Equals(1));
+            Assert.True(value.Equals(2));
+            Assert.False(value.Equals(3));
         }
 
         [Fact]
         [SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global")]
         public void Equals_objectのテスト()
         {
-            var value = new ChainComparableValue<int>(100);
+            var value = new ChainComparableValue<int>(2);
 
-            Assert.False(value.Equals((object)99));
-            Assert.True(value.Equals((object)100));
-            Assert.False(value.Equals((object)101));
+            Assert.False(value.Equals((object)1));
+            Assert.True(value.Equals((object)2));
+            Assert.False(value.Equals((object)3));
         }
 
         [Fact]
@@ -368,11 +368,11 @@ namespace ChainComparable.Tests
         [Fact]
         public void CompareToのテスト()
         {
-            var value = new ChainComparableValue<int>(100);
+            var value = new ChainComparableValue<int>(2);
 
-            Assert.True(value.CompareTo(99) > 0);
-            Assert.True(value.CompareTo(100) == 0);
-            Assert.True(value.CompareTo(99) > 0);
+            Assert.True(value.CompareTo(1) > 0);
+            Assert.True(value.CompareTo(2) == 0);
+            Assert.True(value.CompareTo(3) > 0);
         }
 
         [Fact]

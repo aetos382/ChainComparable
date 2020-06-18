@@ -90,11 +90,17 @@ namespace ChainComparable.Tests
         [Fact]
         public void 非等値比較()
         {
-            var left = new CompareResult<int>(Any<bool>.Value, 1, 2);
-            var right = new CompareResult<int>(Any<bool>.Value, 1, 2);
+            var left1 = new CompareResult<int>(Any<bool>.Value, 1, 2);
+            var right1 = new CompareResult<int>(Any<bool>.Value, 1, 2);
 
             // 2 != 1
-            Assert.True(left != right);
+            Assert.True(left1 != right1);
+
+            var left2 = new CompareResult<int>(Any<bool>.Value, 2, 2);
+            var right2 = new CompareResult<int>(Any<bool>.Value, 1, 2);
+
+            // 2 != 1
+            Assert.True(left2 != right2);
         }
 
         [Fact]
@@ -120,10 +126,10 @@ namespace ChainComparable.Tests
         [Fact]
         public void 小なり比較()
         {
-            var left = new CompareResult<int>(Any<bool>.Value, 100, 1);
-            var right = new CompareResult<int>(Any<bool>.Value, 200, 1);
+            var left = new CompareResult<int>(Any<bool>.Value, 2, 1);
+            var right = new CompareResult<int>(Any<bool>.Value, 2, 1);
 
-            // 1 < 200
+            // 1 < 2
             Assert.True(left < right);
         }
 
@@ -131,7 +137,7 @@ namespace ChainComparable.Tests
         public void 小なり比較_左がT()
         {
             var left = 1;
-            var right = new CompareResult<int>(Any<bool>.Value, 2, 100);
+            var right = new CompareResult<int>(Any<bool>.Value, 2, 1);
 
             // 1 < 2
             Assert.True(left < right);
@@ -140,7 +146,7 @@ namespace ChainComparable.Tests
         [Fact]
         public void 小なり比較_右がT()
         {
-            var left = new CompareResult<int>(Any<bool>.Value, 100, 1);
+            var left = new CompareResult<int>(Any<bool>.Value, 2, 1);
             var right = 2;
 
             // 1 < 2
@@ -150,8 +156,8 @@ namespace ChainComparable.Tests
         [Fact]
         public void 大なり比較()
         {
-            var left = new CompareResult<int>(Any<bool>.Value, 100, 2);
-            var right = new CompareResult<int>(Any<bool>.Value, 1, 100);
+            var left = new CompareResult<int>(Any<bool>.Value, 1, 2);
+            var right = new CompareResult<int>(Any<bool>.Value, 1, 2);
 
             // 2 > 1
             Assert.True(left > right);
@@ -161,7 +167,7 @@ namespace ChainComparable.Tests
         public void 大なり比較_左がT()
         {
             var left = 2;
-            var right = new CompareResult<int>(Any<bool>.Value, 1, 100);
+            var right = new CompareResult<int>(Any<bool>.Value, 1, 2);
 
             // 2 > 1
             Assert.True(left > right);
@@ -170,7 +176,7 @@ namespace ChainComparable.Tests
         [Fact]
         public void 大なり比較_右がT()
         {
-            var left = new CompareResult<int>(Any<bool>.Value, 100, 2);
+            var left = new CompareResult<int>(Any<bool>.Value, 1, 2);
             var right = 1;
 
             // 2 > 1
@@ -180,40 +186,40 @@ namespace ChainComparable.Tests
         [Fact]
         public void 小なり等値比較()
         {
-            var left = new CompareResult<int>(Any<bool>.Value, 100, 1);
-            var right = new CompareResult<int>(Any<bool>.Value, 200, 1);
+            var left = new CompareResult<int>(Any<bool>.Value, 4, 2);
+            var right = new CompareResult<int>(Any<bool>.Value, 3, 1);
 
-            // 1 < 200
+            // 2 <= 3
             Assert.True(left <= right);
         }
 
         [Fact]
         public void 小なり等値比較_左がT()
         {
-            var left = 1;
-            var right = new CompareResult<int>(Any<bool>.Value, 2, 100);
+            var left = 2;
+            var right = new CompareResult<int>(Any<bool>.Value, 3, 1);
 
-            // 1 < 2
+            // 2 <= 3
             Assert.True(left <= right);
         }
 
         [Fact]
         public void 小なり等値比較_右がT()
         {
-            var left = new CompareResult<int>(Any<bool>.Value, 100, 1);
+            var left = new CompareResult<int>(Any<bool>.Value, 3, 1);
             var right = 2;
 
-            // 1 < 2
+            // 1 <= 2
             Assert.True(left <= right);
         }
 
         [Fact]
         public void 大なり等値比較()
         {
-            var left = new CompareResult<int>(Any<bool>.Value, 100, 2);
-            var right = new CompareResult<int>(Any<bool>.Value, 1, 100);
+            var left = new CompareResult<int>(Any<bool>.Value, 1, 3);
+            var right = new CompareResult<int>(Any<bool>.Value, 2, 4);
 
-            // 2 > 1
+            // 3 >= 2
             Assert.True(left >= right);
         }
 
@@ -221,19 +227,19 @@ namespace ChainComparable.Tests
         public void 大なり等値比較_左がT()
         {
             var left = 2;
-            var right = new CompareResult<int>(Any<bool>.Value, 1, 100);
+            var right = new CompareResult<int>(Any<bool>.Value, 1, 3);
 
-            // 2 > 1
+            // 2 >= 1
             Assert.True(left >= right);
         }
 
         [Fact]
         public void 大なり等値比較_右がT()
         {
-            var left = new CompareResult<int>(Any<bool>.Value, 100, 2);
-            var right = 1;
+            var left = new CompareResult<int>(Any<bool>.Value, 1, 3);
+            var right = 2;
 
-            // 2 > 1
+            // 2 >= 1
             Assert.True(left >= right);
         }
     }
