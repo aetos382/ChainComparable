@@ -414,25 +414,21 @@ namespace ChainComparable.Tests
         [Fact]
         public void GetHashCodeが成功する()
         {
-            var value = new ChainComparableValue<string>(string.Empty);
+            var nullValue = new ChainComparableValue<string>(null);
+            var nonNullValue = new ChainComparableValue<int>(Any<int>.Value);
 
-            _ = value.GetHashCode();
-        }
-
-        [Fact]
-        public void GetHashCodeはnullだと0を返す()
-        {
-            var value = new ChainComparableValue<string>(null);
-
-            Assert.Equal(0, value.GetHashCode());
+            _ = nullValue.GetHashCode();
+            _ = nonNullValue.GetHashCode();
         }
 
         [Fact]
         public void ToStringが成功する()
         {
-            var value = new ChainComparableValue<string>(Any<string>.Value);
+            var nullValue = new ChainComparableValue<string>(null);
+            var nonNullValue = new ChainComparableValue<int>(Any<int>.Value);
 
-            _ = value.ToString();
+            _ = nullValue.ToString();
+            _ = nonNullValue.ToString();
         }
     }
 }
