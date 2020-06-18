@@ -47,11 +47,5 @@ namespace ChainComparable.Tests
                     ChainComparer<int>.Comparer = null;
                 });
         }
-
-        [Fact]
-        public void InternalGetHashCodeはnullを渡すと0を返す()
-        {
-            Assert.Equal(0, ChainComparer<string>.InternalGetHashCode(null));
-        }
     }
 }
