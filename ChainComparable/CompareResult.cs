@@ -1,63 +1,53 @@
-﻿using System;
+﻿#pragma warning disable CS0660
+#pragma warning disable CS0661
+#pragma warning disable CA1815
+#pragma warning disable CA2225
+
+using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ChainComparable
 {
-    public readonly struct CompareResult<T> :
-        IEquatable<T>,
-        IComparable<T>
+    public readonly struct CompareResult<T>
         where T : IComparable<T>
     {
         public CompareResult(
             bool result,
-            [AllowNull] T rightTerm)
+            [AllowNull] T leftValue,
+            [AllowNull] T rightValue)
         {
             this.Result = result;
-            this._valueHolder = new ValueHolder<T>(rightTerm);
+            this.LeftValue = leftValue;
+            this.RightValue = rightValue;
         }
 
-        public bool Result { get; }
+        public bool Result
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
-        public T RightTerm
+        [AllowNull]
+        public T LeftValue
         {
             [return: MaybeNull]
-            get
-            {
-                return this._valueHolder.Value;
-            }
+            [DebuggerStepThrough]
+            get;
+        }
+
+        [AllowNull]
+        public T RightValue
+        {
+            [return: MaybeNull]
+            [DebuggerStepThrough]
+            get;
         }
 
         public CompareResult<T> Negate()
         {
-            return new CompareResult<T>(!this.Result, this.RightTerm);
+            return new CompareResult<T>(!this.Result, this.LeftValue, this.RightValue);
         }
-        
-        public bool Equals(
-            [AllowNull] T other)
-        {
-            return this._valueHolder.Equals(other);
-        }
-
-        public int CompareTo(
-            [AllowNull] T other)
-        {
-            return this._valueHolder.CompareTo(other);
-        }
-
-        public override bool Equals(
-            object? obj)
-        {
-            return this._valueHolder.Equals(obj);
-        }
-
-#pragma warning disable IDE0070
-
-        public override int GetHashCode()
-        {
-            return this._valueHolder.GetHashCode();
-        }
-
-#pragma warning restore IDE0070
 
         public static implicit operator bool(
             in CompareResult<T> result)
@@ -65,13 +55,6 @@ namespace ChainComparable
             return result.Result;
         }
 
-        [return: MaybeNull]
-        public static implicit operator T(
-            in CompareResult<T> result)
-        {
-            return result.RightTerm;
-        }
-        
         public static CompareResult<T> operator !(
             in CompareResult<T> result)
         {
@@ -82,44 +65,126 @@ namespace ChainComparable
             in CompareResult<T> left,
             [AllowNull] in T right)
         {
-            return left._valueHolder.InternalEquals(right);
+            return ChainComparer<T>.InternalEquals(left.RightValue, right);
+        }
+
+        public static CompareResult<T> operator ==(
+            [AllowNull] in T left,
+            in CompareResult<T> right)
+        {
+            return ChainComparer<T>.InternalEquals(left, right.LeftValue);
+        }
+
+        public static CompareResult<T> operator ==(
+            in CompareResult<T> left,
+            in CompareResult<T> right)
+        {
+            return ChainComparer<T>.InternalEquals(left.RightValue, right.LeftValue);
         }
 
         public static CompareResult<T> operator !=(
             in CompareResult<T> left,
             [AllowNull] in T right)
         {
-            return left._valueHolder.InternalNotEquals(right);
+            return ChainComparer<T>.InternalNotEquals(left.RightValue, right);
+        }
+
+        public static CompareResult<T> operator !=(
+            [AllowNull] in T left,
+            in CompareResult<T> right)
+        {
+            return ChainComparer<T>.InternalNotEquals(left, right.LeftValue);
+        }
+
+        public static CompareResult<T> operator !=(
+            in CompareResult<T> left,
+            in CompareResult<T> right)
+        {
+            return ChainComparer<T>.InternalNotEquals(left.RightValue, right.LeftValue);
         }
 
         public static CompareResult<T> operator <(
             in CompareResult<T> left,
             [AllowNull] in T right)
         {
-            return left._valueHolder.InternalLessThan(right);
+            return ChainComparer<T>.InternalLessThan(left.RightValue, right);
+        }
+
+        public static CompareResult<T> operator <(
+            [AllowNull] in T left,
+            in CompareResult<T> right)
+        {
+            return ChainComparer<T>.InternalLessThan(left, right.LeftValue);
+        }
+
+        public static CompareResult<T> operator <(
+            in CompareResult<T> left,
+            in CompareResult<T> right)
+        {
+            return ChainComparer<T>.InternalLessThan(left.RightValue, right.LeftValue);
         }
 
         public static CompareResult<T> operator >(
             in CompareResult<T> left,
             [AllowNull] in T right)
         {
-            return left._valueHolder.InternalGreaterThan(right);
+            return ChainComparer<T>.InternalGreaterThan(left.RightValue, right);
+        }
+
+        public static CompareResult<T> operator >(
+            [AllowNull] in T left,
+            in CompareResult<T> right)
+        {
+            return ChainComparer<T>.InternalGreaterThan(left, right.LeftValue);
+        }
+
+        public static CompareResult<T> operator >(
+            in CompareResult<T> left,
+            in CompareResult<T> right)
+        {
+            return ChainComparer<T>.InternalGreaterThan(left.RightValue, right.LeftValue);
         }
 
         public static CompareResult<T> operator <=(
             in CompareResult<T> left,
             [AllowNull] in T right)
         {
-            return left._valueHolder.InternalLessThanOrEqual(right);
+            return ChainComparer<T>.InternalLessThanOrEqual(left.RightValue, right);
+        }
+
+        public static CompareResult<T> operator <=(
+            [AllowNull] in T left,
+            in CompareResult<T> right)
+        {
+            return ChainComparer<T>.InternalLessThanOrEqual(left, right.LeftValue);
+        }
+
+        public static CompareResult<T> operator <=(
+            in CompareResult<T> left,
+            in CompareResult<T> right)
+        {
+            return ChainComparer<T>.InternalLessThanOrEqual(left.RightValue, right.LeftValue);
         }
 
         public static CompareResult<T> operator >=(
             in CompareResult<T> left,
             [AllowNull] in T right)
         {
-            return left._valueHolder.InternalGreaterThanOrEqual(right);
+            return ChainComparer<T>.InternalGreaterThanOrEqual(left.RightValue, right);
         }
 
-        private readonly ValueHolder<T> _valueHolder;
+        public static CompareResult<T> operator >=(
+            [AllowNull] in T left,
+            in CompareResult<T> right)
+        {
+            return ChainComparer<T>.InternalGreaterThanOrEqual(left, right.LeftValue);
+        }
+
+        public static CompareResult<T> operator >=(
+            in CompareResult<T> left,
+            in CompareResult<T> right)
+        {
+            return ChainComparer<T>.InternalGreaterThanOrEqual(left.RightValue, right.LeftValue);
+        }
     }
 }

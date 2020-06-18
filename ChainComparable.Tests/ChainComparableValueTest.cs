@@ -1,32 +1,34 @@
-﻿using Xunit;
+﻿#pragma warning disable CA1707
+
+using Xunit;
 
 namespace ChainComparable.Tests
 {
     public class ChainComparableValueTest
     {
         [Fact]
-        public void 二項小なり演算()
-        {
-            var a = new ChainComparableValue<int>(1);
-            var b = new ChainComparableValue<int>(2);
-
-            Assert.True(a < b);
-        }
-
-        [Fact]
-        public void 二項大なり演算()
-        {
-            var a = new ChainComparableValue<int>(2);
-            var b = new ChainComparableValue<int>(1);
-
-            Assert.True(a > b);
-        }
-
-        [Fact]
         public void 二項等値演算()
         {
             var a = new ChainComparableValue<int>(1);
             var b = new ChainComparableValue<int>(1);
+
+            Assert.True(a == b);
+        }
+
+        [Fact]
+        public void 二項等値演算_左がT()
+        {
+            var a = 1;
+            var b = new ChainComparableValue<int>(1);
+
+            Assert.True(a == b);
+        }
+
+        [Fact]
+        public void 二項等値演算_右がT()
+        {
+            var a = new ChainComparableValue<int>(1);
+            var b = 1;
 
             Assert.True(a == b);
         }
@@ -41,6 +43,78 @@ namespace ChainComparable.Tests
         }
 
         [Fact]
+        public void 二項非等値演算_左がT()
+        {
+            var a = 1;
+            var b = new ChainComparableValue<int>(2);
+
+            Assert.True(a != b);
+        }
+
+        [Fact]
+        public void 二項非等値演算_右がT()
+        {
+            var a = new ChainComparableValue<int>(1);
+            var b = 2;
+
+            Assert.True(a != b);
+        }
+
+        [Fact]
+        public void 二項小なり演算()
+        {
+            var a = new ChainComparableValue<int>(1);
+            var b = new ChainComparableValue<int>(2);
+
+            Assert.True(a < b);
+        }
+
+        [Fact]
+        public void 二項小なり演算_左がT()
+        {
+            var a = 1;
+            var b = new ChainComparableValue<int>(2);
+
+            Assert.True(a < b);
+        }
+
+        [Fact]
+        public void 二項小なり演算_右がT()
+        {
+            var a = new ChainComparableValue<int>(1);
+            var b = 2;
+
+            Assert.True(a < b);
+        }
+
+        [Fact]
+        public void 二項大なり演算()
+        {
+            var a = new ChainComparableValue<int>(2);
+            var b = new ChainComparableValue<int>(1);
+
+            Assert.True(a > b);
+        }
+
+        [Fact]
+        public void 二項大なり演算_左がT()
+        {
+            var a = 2;
+            var b = new ChainComparableValue<int>(1);
+
+            Assert.True(a > b);
+        }
+
+        [Fact]
+        public void 二項大なり演算_右がT()
+        {
+            var a = new ChainComparableValue<int>(2);
+            var b = 1;
+
+            Assert.True(a > b);
+        }
+
+        [Fact]
         public void 二項小なり等値演算()
         {
             var a = new ChainComparableValue<int>(1);
@@ -48,7 +122,25 @@ namespace ChainComparable.Tests
 
             Assert.True(a <= b);
         }
-        
+
+        [Fact]
+        public void 二項小なり等値演算_左がT()
+        {
+            var a = 1;
+            var b = new ChainComparableValue<int>(2);
+
+            Assert.True(a < b);
+        }
+
+        [Fact]
+        public void 二項小なり等値演算_右がT()
+        {
+            var a = new ChainComparableValue<int>(1);
+            var b = 2;
+
+            Assert.True(a < b);
+        }
+
         [Fact]
         public void 二項大なり等値演算()
         {
@@ -56,6 +148,24 @@ namespace ChainComparable.Tests
             var b = new ChainComparableValue<int>(1);
 
             Assert.True(a >= b);
+        }
+
+        [Fact]
+        public void 二項大なり等値演算_左がT()
+        {
+            var a = 2;
+            var b = new ChainComparableValue<int>(1);
+
+            Assert.True(a > b);
+        }
+
+        [Fact]
+        public void 二項大なり等値演算_右がT()
+        {
+            var a = new ChainComparableValue<int>(2);
+            var b = 1;
+
+            Assert.True(a > b);
         }
 
         [Fact]
@@ -90,7 +200,7 @@ namespace ChainComparable.Tests
             Assert.True(a == b == c);
             Assert.True(a == b && b == c);
         }
-        
+
         [Fact]
         public void 三項等値_不等値演算()
         {
@@ -101,7 +211,7 @@ namespace ChainComparable.Tests
             Assert.True(a == b != c);
             Assert.True(a == b && b != c);
         }
-        
+
         [Fact]
         public void 三項小なり等値演算()
         {
@@ -123,7 +233,7 @@ namespace ChainComparable.Tests
             Assert.True(a >= b >= c);
             Assert.True(a >= b && b >= c);
         }
-        
+
         [Fact]
         public void 三項大なり_小なり演算()
         {
@@ -143,11 +253,9 @@ namespace ChainComparable.Tests
             var c = new ChainComparableValue<int>(3);
 
             Assert.True(a < (b < c));
-
-            // TODO: これ、今はこうだけど、いいのかそれで？
-            Assert.True(a < c && b < c);
+            Assert.True(a < b && b < c);
         }
-        
+
         [Fact]
         public void 三項大なり演算_カッコつき()
         {
@@ -156,11 +264,9 @@ namespace ChainComparable.Tests
             var c = new ChainComparableValue<int>(1);
 
             Assert.True(a > (b > c));
-
-            // TODO: 同上
-            Assert.True(a > c && b > c);
+            Assert.True(a > b && b > c);
         }
-                
+
         [Fact]
         public void 三項等値演算_カッコつき()
         {
@@ -171,18 +277,16 @@ namespace ChainComparable.Tests
             Assert.True(a == (b == c));
             Assert.True(a == b && b == c);
         }
-                        
+
         [Fact]
         public void 三項小なり_大なり演算_カッコつき()
         {
-            var a = new ChainComparableValue<int>(1);
+            var a = new ChainComparableValue<int>(3);
             var b = new ChainComparableValue<int>(5);
-            var c = new ChainComparableValue<int>(3);
+            var c = new ChainComparableValue<int>(1);
 
             Assert.True(a < (b > c));
-
-            // TODO: この解釈が自然とはとても思えない…
-            Assert.True(a < c && b > c);
+            Assert.True(a < b && b > c);
         }
 
         [Fact]
@@ -202,7 +306,7 @@ namespace ChainComparable.Tests
             Assert.True(value.Equals(100));
             Assert.False(value.Equals(101));
         }
-        
+
         [Fact]
         public void Equals_objectのテスト()
         {
@@ -222,7 +326,7 @@ namespace ChainComparable.Tests
             Assert.False(nonNullValue.Equals(null));
             Assert.False(nullValue.Equals(string.Empty));
         }
-        
+
         [Fact]
         public void Equals_objectでnullとnull以外を比較すると等しくない()
         {
@@ -240,7 +344,7 @@ namespace ChainComparable.Tests
 
             Assert.True(value.Equals(null));
         }
-        
+
         [Fact]
         public void Equals_objectでnull同士を比較すると等しい()
         {
