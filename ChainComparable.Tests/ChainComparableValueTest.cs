@@ -372,7 +372,7 @@ namespace ChainComparable.Tests
 
             Assert.True(value.CompareTo(1) > 0);
             Assert.True(value.CompareTo(2) == 0);
-            Assert.True(value.CompareTo(3) > 0);
+            Assert.True(value.CompareTo(3) < 0);
         }
 
         [Fact]
