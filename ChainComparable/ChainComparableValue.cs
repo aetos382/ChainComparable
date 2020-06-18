@@ -1,4 +1,4 @@
-﻿#pragma warning disable CA1066
+#pragma warning disable CA1066
 #pragma warning disable CA2225
 
 using System;
@@ -19,6 +19,7 @@ namespace ChainComparable
         }
 
         [AllowNull]
+        // ReSharper disable once MemberCanBePrivate.Global
         public T Value
         {
             [return: MaybeNull]

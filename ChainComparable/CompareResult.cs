@@ -29,6 +29,7 @@ namespace ChainComparable
         }
 
         [AllowNull]
+        // ReSharper disable once MemberCanBePrivate.Global
         public T LeftValue
         {
             [return: MaybeNull]
@@ -37,6 +38,7 @@ namespace ChainComparable
         }
 
         [AllowNull]
+        // ReSharper disable once MemberCanBePrivate.Global
         public T RightValue
         {
             [return: MaybeNull]
