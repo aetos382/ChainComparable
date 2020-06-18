@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ChainComparable
@@ -17,8 +18,12 @@ namespace ChainComparable
         }
 
         [AllowNull]
-        [MaybeNull]
-        public T Value { get; }
+        public T Value
+        {
+            [return: MaybeNull]
+            [DebuggerStepThrough]
+            get;
+        }
 
         private readonly string _stringValue;
 
