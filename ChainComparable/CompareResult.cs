@@ -55,12 +55,6 @@ namespace ChainComparable
             return result.Result;
         }
 
-        public static CompareResult<T> operator !(
-            in CompareResult<T> result)
-        {
-            return result.Negate();
-        }
-
         public static CompareResult<T> operator ==(
             in CompareResult<T> left,
             [AllowNull] in T right)
