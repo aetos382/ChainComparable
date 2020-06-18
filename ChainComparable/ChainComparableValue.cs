@@ -53,7 +53,7 @@ namespace ChainComparable
         public bool Equals(
             [AllowNull] T other)
         {
-            return ChainComparer<T>.InternalEquals(this.Value, other);
+            return ChainComparer<T>.InternalEquals(this.Value, other).Result;
         }
 
         public int CompareTo(
