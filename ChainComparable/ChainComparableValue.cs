@@ -45,14 +45,10 @@ namespace ChainComparable
                 ChainComparer<T>.InternalEquals(this.Value, other).Result;
         }
 
-#pragma warning disable IDE0070
-
         public override int GetHashCode()
         {
             return ChainComparer<T>.InternalGetHashCode(this.Value);
         }
-
-#pragma warning restore IDE0070
 
         public bool Equals(
             [AllowNull] T other)
