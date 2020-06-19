@@ -270,5 +270,13 @@ namespace ChainComparable.Tests
             // 2 >= 1
             Assert.True(left >= right);
         }
+
+        [Fact]
+        public void ToStringが成功する()
+        {
+            var result = new CompareResult<int>(true, 1, 2, ComparisonOperator.Equality);
+
+            _ = result.ToString();
+        }
     }
 }

@@ -17,6 +17,12 @@ namespace ChainComparable.Tests
         {
             Assert.NotNull(ChainComparer<int>.Comparer);
         }
+        
+        [Fact]
+        public void Comparerをセットできる()
+        {
+            ChainComparer<int>.Comparer = ChainComparer<int>.DefaultComparer;
+        }
 
         [Fact]
         public void ComparerにnullをセットするとArgumentNullExceptionが飛ぶ()
