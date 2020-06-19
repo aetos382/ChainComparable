@@ -56,7 +56,7 @@ namespace ChainComparable.Tests
             ComparisonOperator negated)
         {
             var trueResult = new CompareResult<int>(
-                true,
+                Any<bool>.Value,
                 Any<int>.Value,
                 Any<int>.Value,
                 original);
