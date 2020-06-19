@@ -39,7 +39,8 @@ namespace ChainComparable
 
             return new CompareResult<T>(
                 _comparer.Compare(left, right) == 0,
-                left, right);
+                left,
+                right);
 
 #pragma warning restore CS8604
         }
