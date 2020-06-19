@@ -4,7 +4,6 @@
 #pragma warning disable CA2225
 
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
@@ -16,19 +15,11 @@ namespace ChainComparable
         public CompareResult(
             bool result,
             [AllowNull] T leftValue,
-            [AllowNull] T rightValue,
-            ComparisonOperator comparisonOperator)
+            [AllowNull] T rightValue)
         {
             this.Result = result;
             this.LeftValue = leftValue;
             this.RightValue = rightValue;
-            this.Operator = comparisonOperator;
-
-            this._stringForm = ToString(
-                result,
-                leftValue,
-                rightValue,
-                comparisonOperator);
         }
 
         public bool Result
@@ -55,67 +46,14 @@ namespace ChainComparable
             get;
         }
 
-        public ComparisonOperator Operator
-        {
-            [DebuggerStepThrough]
-            get;
-        }
-
         public CompareResult<T> Negate()
         {
-#pragma warning disable CA1303
-
-            var negatedOperator = this.Operator switch {
-                ComparisonOperator.Equality => ComparisonOperator.Inequality,
-                ComparisonOperator.Inequality => ComparisonOperator.Equality,
-                ComparisonOperator.LessThan => ComparisonOperator.GreaterThanOrEqual,
-                ComparisonOperator.GreaterThan => ComparisonOperator.LessThanOrEqual,
-                ComparisonOperator.LessThanOrEqual => ComparisonOperator.GreaterThan,
-                ComparisonOperator.GreaterThanOrEqual => ComparisonOperator.LessThan,
-
-                _ => throw new InvalidOperationException("Invalid operator")
-            };
-
-#pragma warning restore CA1303
-
             return new CompareResult<T>(
                 !this.Result,
                 this.LeftValue,
-                this.RightValue,
-                negatedOperator);
+                this.RightValue);
         }
-
-        private static string ToString(
-            bool result,
-            [AllowNull] in T leftValue,
-            [AllowNull] in T rightValue,
-            ComparisonOperator comparisonOperator)
-        {
-            string operatorString = comparisonOperator switch {
-                ComparisonOperator.Equality => "==",
-                ComparisonOperator.Inequality => "!=",
-                ComparisonOperator.LessThan => "<",
-                ComparisonOperator.GreaterThan => ">",
-                ComparisonOperator.LessThanOrEqual => "<=",
-                ComparisonOperator.GreaterThanOrEqual => ">=",
-
-                _ => throw new InvalidEnumArgumentException(
-                    nameof(comparisonOperator),
-                    (int) comparisonOperator,
-                    typeof(ComparisonOperator))
-            };
-
-            string stringForm = $"{result} ({leftValue} {operatorString} {rightValue})";
-            return stringForm;
-        }
-
-        private readonly string _stringForm;
-
-        public override string ToString()
-        {
-            return this._stringForm;
-        }
-
+        
         public static implicit operator bool(
             in CompareResult<T> result)
         {

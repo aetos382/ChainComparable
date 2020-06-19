@@ -40,8 +40,7 @@ namespace ChainComparable
             return new CompareResult<T>(
                 _comparer.Compare(left, right) == 0,
                 left,
-                right,
-                ComparisonOperator.Equality);
+                right);
 
 #pragma warning restore CS8604
         }
@@ -71,8 +70,7 @@ namespace ChainComparable
             return new CompareResult<T>(
                 InternalCompare(left, right) < 0,
                 left,
-                right,
-                ComparisonOperator.LessThan);
+                right);
         }
 
         internal static CompareResult<T> InternalGreaterThan(
@@ -82,8 +80,7 @@ namespace ChainComparable
             return new CompareResult<T>(
                 InternalCompare(left, right) > 0,
                 left,
-                right,
-                ComparisonOperator.GreaterThan);
+                right);
         }
 
         internal static CompareResult<T> InternalLessThanOrEqual(
