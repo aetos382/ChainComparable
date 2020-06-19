@@ -308,7 +308,11 @@ namespace ChainComparable.Tests
             var d = new ChainComparableValue<int>(4);
             var e = new ChainComparableValue<int>(5);
 
+#pragma warning disable IDE0047
+
             Assert.True((a < b) < (c < (d < e)));
+
+#pragma warning restore IDE0047
 
             Assert.True(
                 a < b &&
